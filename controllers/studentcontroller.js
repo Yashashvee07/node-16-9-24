@@ -15,7 +15,7 @@ const student = require('../models/student');
 }
 async function getStudents(req , res){
     try{
-        let students = await student.find({});
+        let students = await Student.find({});
         console.log(students , 'students');
         res.send(students)
     }catch(err){
@@ -23,7 +23,20 @@ async function getStudents(req , res){
     }
 }
 
+async function getStudentByRollNo(req , res){
+    try{
+        let rollNo = parseInt(req.param.rollNo);
+        console.log(rollNo , 'rollNo')
+        let students = await Student.findone({rollNo: rollNo});
+        console.log(students , 'students');
+        res.send(student)
+    }catch(err){
+           console.log(err, 'err');
+    }
+}
+
 module.exports = {
     addStudent,
-    getStudents
+    getStudents,
+    getStudentByRollNo
 }
